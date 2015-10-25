@@ -1,8 +1,9 @@
-include <UserDetails.h>
+#include <iostream>
+#include "UserDetails.h"
 
 using namespace std;
 
-UserDetails::getdetails()
+void UserDetails::getdetails()
 	{
 		name = new char[40];
 		cout << endl << endl << "**********Customer Details*********** " << endl;
@@ -19,7 +20,8 @@ UserDetails::getdetails()
 		cin >> city;
 		cout << "______________________________________" << endl;
 	}
-UserDetails::saveUser()
+int UserDetails::saveUser()
 	{ cout << endl << "Function saveUser function not written yet..." << endl;
-	}
+return 0;
+}
 

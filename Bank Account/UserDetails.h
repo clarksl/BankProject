@@ -12,5 +12,4 @@ public:
 	char city[40];
 	void getdetails();
 	int saveUser();
-	
 };

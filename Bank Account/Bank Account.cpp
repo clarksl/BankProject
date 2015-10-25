@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include "stdafx.h"
 #include <conio.h>
-#include <UserDetails.h>
+#include "UserDetails.h"
 
 using namespace std;
 
@@ -24,13 +24,14 @@ public:
 	void newaccount();
 	void viewaccdetails();
 };
+
 int bank::accnumber = 0;
 int main()
 {
 	char ch;
 	static int i = 0;
 	bank *a[10];
-	int x, amt, k, j;
+	int x, k, j;
 	do
 	{
 		cout << endl << endl << "************MENU************" << endl;
@@ -46,7 +47,7 @@ int main()
 				  i++;
 				  a[i] = new bank;
 				  a[i]->newaccount();
-				  
+				  break;
 		}
 		case 2:
 		{
