@@ -1,0 +1,15 @@
+﻿Build started 10/21/2015 9:29:43 PM.
+     1>Project "C:\Users\Cameron\Documents\Visual Studio 2013\Projects\Bank Account\Bank Account\Bank Account.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "Bank Account.cpp"
+         Bank Account.cpp
+     1>c:\users\cameron\documents\visual studio 2013\projects\bank account\bank account\bank account.cpp(57): warning C4101: 'amt' : unreferenced local variable
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Cameron\Documents\Visual Studio 2013\Projects\Bank Account\Debug\Bank Account.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Cameron\Documents\Visual Studio 2013\Projects\Bank Account\Debug\Bank Account.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Cameron\Documents\Visual Studio 2013\Projects\Bank Account\Debug\Bank Account.lib" /MACHINE:X86 "Debug\Bank Account.obj"
+         Debug\stdafx.obj
+         Bank Account.vcxproj -> C:\Users\Cameron\Documents\Visual Studio 2013\Projects\Bank Account\Debug\Bank Account.exe
+     1>Done Building Project "C:\Users\Cameron\Documents\Visual Studio 2013\Projects\Bank Account\Bank Account\Bank Account.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.73
