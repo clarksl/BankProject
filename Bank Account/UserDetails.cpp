@@ -1,13 +1,8 @@
+include <UserDetails>
+
 using namespace std;
-class UserDetails
-{
-public:
-	char *name;
-	int age;
-	int accno;
-	char branch[50];
-	char city[40];
-	void getdetails()
+
+UserDetails::getdetails()
 	{
 		name = new char[40];
 		cout << endl << endl << "**********Customer Details*********** " << endl;
@@ -24,7 +19,7 @@ public:
 		cin >> city;
 		cout << "______________________________________" << endl;
 	}
-	int saveUser()
+UserDetails::saveUser()
 	{ cout << endl << "Function saveUser function not written yet..." << endl;
 	}
-};
+
