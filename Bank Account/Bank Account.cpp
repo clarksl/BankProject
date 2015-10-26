@@ -8,24 +8,13 @@
 #include "stdafx.h"
 #include <conio.h>
 #include "UserDetails.h"
+#include "BankClass.h"
 
 using namespace std;
 
-class bank
-{
-public:
-	static int accnumber;
-	long balance;
-	UserDetails d;
-	void getdata();
-	bank transfermoney(bank);
-	void deposit();
-	void withdrawal();
-	void newaccount();
-	void viewaccdetails();
-};
-
 int bank::accnumber = 0;
+int get_account();
+
 int main()
 {
 	char ch;
@@ -44,23 +33,21 @@ int main()
 		{
 		case 1:
 		{
-				  i++;
 				  a[i] = new bank;
 				  a[i]->newaccount();
+				  i++; 
 				  break;
 		}
 		case 2:
-		{
-				  cout << "Enter account no.: ";
-				  cin >> k;
+		{         /* this account number is really the array index and not the 'accnumber' on the class - this needs to be changed */
+				  k = get_account();
 				  a[k]->deposit();
 				  break;
 		}
 		case 3:
-		{
-				  cout << "Enter account no.: ";
-				  cin >> k;
-				  a[k]->withdrawal();
+		{  
+			k = get_account();
+			a[k]->withdrawal();
 				  break;
 		}
 		case 4:
@@ -71,63 +58,26 @@ int main()
 				  break;
 		}
 		case 5:
-		{
-				  cout << "Enter account no.: ";
-				  cin >> k;
+		{		  k = get_account();
 				  a[k]->viewaccdetails();
 				  break;
 		}
-		}cout << "\nDo you wish to continue[Press 'Y' to continue or 'N' to exit menu]: ";
+		}cout << "\nDo you wish to continue [Press 'Y' to continue or 'N' to exit menu] : ";
 		cin >> ch;
 	} while (ch == 'y' || ch == 'Y');
 }
-bank bank::transfermoney(bank a)
-{
-	long amt;
-	cout << "Enter amount to be transferred: ";
-	cin >> amt;
-	a.balance = a.balance + amt;
-	if (balance<amt)
-	{
-		cout << "\nInsufficient balance! Operation Cannot be performed!" << endl << endl;
-	}
-	else
-	{
-		balance = balance - amt;
-	}
-	return a;
-}
-void bank::withdrawal()
-{
-	int amtdrawn;
-	cout << "Enter amount to be withdrawn: ";
-	cin >> amtdrawn;
-	if (balance <= amtdrawn)
-		cout << "\nInsufficient balance! Operation Cannot be performed!" << endl << endl;
-	else
-		balance = balance - amtdrawn;
-}
-void bank::deposit()
-{
-	int dep;
-	cout << "Enter amount to be deposited: ";
-	cin >> dep;
-	balance += dep;
-}
-void bank::newaccount()
-{
-	accnumber++;
-	d.getdetails();
-	balance = 0;
-}
-void bank::viewaccdetails()
-{
-	cout << endl << endl << "*********ASSIGNMENT BANK ACCOUNT DETAILS*********" << endl;
-	cout << "         --- ---- ------- -------         " << endl;
-	cout << "Account no.: " << accnumber << endl;
-	cout << "Name: " << d.name << endl;
-	cout << "Branch: " << d.branch << endl;
-	cout << "City: " << d.city << endl;
-	cout << "Current Balance: " << balance << endl;
-	cout << "_________________________________________" << endl;
+
+int get_account()
+{  /* this function ensures that we get an account that fits within the array of bank accounts */
+	int i;
+	do {
+		cout << "Enter account number [0-9]: ";
+		while (!(cin >> i) || i < 0) // <<< note use of "short circuit" logical operation here
+		{
+			cout << "Bad input - try again: ";
+			cin.clear();
+			cin.ignore(INT_MAX, '\n'); // NB: preferred method for flushing cin
+		}
+	} while (i < 0 || i>9);
+	return i;
 }
