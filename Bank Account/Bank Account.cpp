@@ -2,6 +2,8 @@
 //
 
 #include <iostream>
+#include <sys/stat.h>
+#include <fstream>
 #include <string.h>
 #include <process.h>
 #include <stdio.h>
@@ -14,6 +16,7 @@ using namespace std;
 
 int bank::accnumber = 0;
 int get_account();
+int saveaccdetails(bank *a[], int count);
 
 int main()
 {
@@ -65,6 +68,7 @@ int main()
 		}cout << "\nDo you wish to continue [Press 'Y' to continue or 'N' to exit menu] : ";
 		cin >> ch;
 	} while (ch == 'y' || ch == 'Y');
+	saveaccdetails(a, i);
 }
 
 int get_account()
@@ -80,4 +84,26 @@ int get_account()
 		}
 	} while (i < 0 || i>9);
 	return i;
+}
+
+int saveaccdetails(bank *a[], int count)
+{  
+	/* this is not working yet - can't seem to find the file*/
+	int j = 0, return_code=0;
+	char buffer[SCHAR_MAX];
+	fstream myFile;
+	myFile.open("c:\bankacct.bin", ios::out | ios::binary); return_code = errno;
+	if (!myFile)
+	{
+		strerror_s(buffer, 80);
+		cerr << "Error opening file, error code is " << return_code << ", system error returned is: " << buffer << endl;
+		return -1;
+	}
+	for (j = 0; j < count; j++)
+	{
+		cout << "writing out item " << j << endl;
+		myFile.write((char*)&a, sizeof(bank));
+	}
+	myFile.close();
+	return 0;
 }
