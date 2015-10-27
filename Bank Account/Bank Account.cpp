@@ -17,6 +17,7 @@ using namespace std;
 int bank::accnumber = 0;
 int get_account();
 int saveaccdetails(bank *a[], int count);
+int readaccdetails(bank *a[]);
 
 int main()
 {
@@ -24,6 +25,7 @@ int main()
 	static int i = 0;
 	bank *a[10];
 	int x, k, j;
+	i = readaccdetails(a);
 	do
 	{
 		cout << endl << endl << "************MENU************" << endl;
@@ -88,11 +90,10 @@ int get_account()
 
 int saveaccdetails(bank *a[], int count)
 {  
-	/* this is not working yet - can't seem to find the file*/
 	int j = 0, return_code=0;
 	char buffer[SCHAR_MAX];
 	fstream myFile;
-	myFile.open("c:\bankacct.bin", ios::out | ios::binary); return_code = errno;
+	myFile.open("bankacct.dat", ios::out | ios::binary); return_code = errno;
 	if (!myFile)
 	{
 		strerror_s(buffer, 80);
@@ -102,8 +103,31 @@ int saveaccdetails(bank *a[], int count)
 	for (j = 0; j < count; j++)
 	{
 		cout << "writing out item " << j << endl;
-		myFile.write((char*)&a, sizeof(bank));
+		myFile.write((char*)a[j], sizeof(bank));
 	}
 	myFile.close();
-	return 0;
+	return j;
+}
+
+int readaccdetails(bank *a[])
+{
+	/* this is not working yet - array is not getting set and viewing the first array after this function crashes */
+	int j = 0, return_code = 0;
+	char buffer[SCHAR_MAX];
+	fstream myFile;
+	myFile.open("bankacct.dat", ios::in | ios::binary); return_code = errno;
+	if (!myFile)
+	{
+		strerror_s(buffer, 80);
+		cerr << "Error opening file, error code is " << return_code << ", system error returned is: " << buffer << endl;
+		return -1;
+	}
+	//for (j = 0; j < count; j++)
+	//{
+		cout << "reading in item " << endl;
+		myFile.read((char*)&a, sizeof(bank));
+		//myFile.read(&a[j], sizeof(bank));
+	//}
+	myFile.close();
+	return j;
 }

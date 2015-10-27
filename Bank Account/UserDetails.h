@@ -5,7 +5,7 @@ using namespace std;
 class UserDetails
 {
 public:
-	char *name;
+	char name[50];
 	int age;
 	int accno;
 	char branch[50];

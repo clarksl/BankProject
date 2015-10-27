@@ -5,7 +5,7 @@ using namespace std;
 
 void UserDetails::getdetails()
 	{
-		name = new char[40];
+//		name = new char[40];
 		cout << endl << endl << "**********Customer Details*********** " << endl;
 		cout << "          -------- -------            " << endl;
 		cout << "Enter Name: ";
