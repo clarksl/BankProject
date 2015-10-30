@@ -23,7 +23,7 @@ int readaccdetails(bank *a[], int count);
 
 int main()
 {
-	char ch;
+	//char ch;
 	static int i = 0;
 	bank *a[MaxBankAccounts];
 	int x, k, j;
@@ -32,7 +32,7 @@ int main()
 	{
 		cout << endl << endl << "************MENU************" << endl;
 		cout << "            ----            " << endl;
-		cout << "1.Create new account\n2.Deposit\n3.Withdraw\n4.Transfer credits\n5.View account details\n\n";
+		cout << "1.Create new account\n2.Deposit\n3.Withdraw\n4.Transfer credits\n5.View account details\n\n9. Exit\n\n";
 		cout << "Enter choice no.: ";
 		cin >> x;
 
@@ -71,9 +71,11 @@ int main()
 				  a[k]->viewaccdetails();
 				  break;
 		}
-		}cout << "\nDo you wish to continue [Press 'Y' to continue or 'N' to exit menu] : ";
-		cin >> ch;
-	} while (ch == 'y' || ch == 'Y');
+		}
+		//cout << "\nDo you wish to continue [Press 'Y' to continue or 'N' to exit menu] : ";
+		//cin >> ch;
+	} while (x != 9);
+	//while (ch == 'y' || ch == 'Y');
 	saveaccdetails(a, i);
 	return EXIT_SUCCESS;  // Although not required, it is recommended to supply return exit code from main for portability - some operating systems require it
 }
@@ -107,7 +109,7 @@ int saveaccdetails(bank *a[], int count)
 	}
 	for (j = 0; j < count; j++)
 	{
-		cout << "writing out item " << j << endl;
+		//cout << "writing out item " << j << endl; // Debugging info
 		myFile.write((char*)a[j], sizeof(bank));
 	}
 	myFile.close();
@@ -128,7 +130,7 @@ int readaccdetails(bank *a[], int count)
 	}
 	for (j = 0; j < count; j++)
 	{
-		cout << "reading in item " << endl;
+		//cout << "reading in item " << endl; //debugging info
 		a[j] = new bank;  // we must allocate a new bank object in the array or it will crash! If not there is no memory allocation location to put data
 		myFile.read((char *)a[j], sizeof(bank));
 		if (myFile.eof()) break;

@@ -47,10 +47,12 @@ void bank::viewaccdetails()
 {  // this function needs to validate that the given account is truly been allocated, that or add a check in the main
 	cout << endl << endl << "*********ASSIGNMENT BANK ACCOUNT DETAILS*********" << endl;
 	cout << "         --- ---- ------- -------         " << endl;
-	cout << "Account no.: " << accnumber << endl;
-	cout << "Name: " << d.name << endl;
-	cout << "Branch: " << d.branch << endl;
-	cout << "City: " << d.city << endl;
-	cout << "Current Balance: " << balance << endl;
-	cout << "_________________________________________" << endl;
+	cout << "\tAccount no.: " << accnumber << endl;
+	cout << "\tName: " << d.name << endl;
+	cout << "\tBranch: " << d.branch << endl;
+	cout << "\tCity: " << d.city << endl;
+//	printf("Current Balance : %.02f\n", balance); //this didn't work
+	//std::cout.precision(2); // this didn't work
+	cout << "\tCurrent Balance: $" << balance << endl;
+	cout << "\t_________________________________________" << endl;
 }

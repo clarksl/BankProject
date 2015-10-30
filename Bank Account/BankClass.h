@@ -4,7 +4,7 @@ class bank
 {
 public:
 	static int accnumber;
-	long balance;
+	float balance;
 	UserDetails d;
 	void getdata();
 	bank transfermoney(bank);
