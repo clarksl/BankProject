@@ -44,7 +44,7 @@ void bank::newaccount()
 	balance = 0;
 }
 void bank::viewaccdetails()
-{
+{  // this function needs to validate that the given account is truly been allocated, that or add a check in the main
 	cout << endl << endl << "*********ASSIGNMENT BANK ACCOUNT DETAILS*********" << endl;
 	cout << "         --- ---- ------- -------         " << endl;
 	cout << "Account no.: " << accnumber << endl;

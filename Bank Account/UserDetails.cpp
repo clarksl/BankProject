@@ -9,7 +9,7 @@ void UserDetails::getdetails()
 		cout << endl << endl << "**********Customer Details*********** " << endl;
 		cout << "          -------- -------            " << endl;
 		cout << "Enter Name: ";
-		std::cin >> name;
+		cin >> name;
 		cout << "Enter Age: ";
 		cin >> age;
 		cout << "Enter Account Number: ";
