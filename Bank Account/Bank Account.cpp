@@ -16,7 +16,8 @@
 const int MaxBankAccounts = 10; // Let's use a constant for the max number of bank accounts - then we don't have to change this everywhere 
 using namespace std;
 
-int bank::accnumber = 0;
+int bank::accnumber = 0;  // not sure why we are initializing this to zero? It should be loaded now from the file by calling readaccDetails
+                          // tried to comment it out but nothing worked right afterwards.
 int get_account();
 int saveaccdetails(bank *a[], int count);
 int readaccdetails(bank *a[], int count);
@@ -28,11 +29,15 @@ int main()
 	bank *a[MaxBankAccounts];
 	int x, k, j;
 	i = readaccdetails(a, MaxBankAccounts);
+	//cout << "number of accounts loaded" << i << endl;
 	do
 	{
-		cout << endl << endl << "************MENU************" << endl;
-		cout << "            ----            " << endl;
-		cout << "1.Create new account\n2.Deposit\n3.Withdraw\n4.Transfer credits\n5.View account details\n\n9. Exit\n\n";
+		cout << endl << endl << "************MENU********************" << endl;
+		if (i>0)
+			cout << "            ----     # Accounts: [0-" << i << "]" << endl;
+		else cout << "            ----     # Accounts: [0]" << endl;
+		
+		cout << "1.Create new account\n2.Deposit\n3.Withdraw\n4.Transfer credits\n5.View account details\n6. Update Account Details\n\n9. Exit\n\n";
 		cout << "Enter choice no.: ";
 		cin >> x;
 
@@ -40,7 +45,9 @@ int main()
 		{
 		case 1:
 		{
-				  a[i] = new bank;
+				  a[i] = new bank;  //this only works on the first one of a scratch file - once you've closed the program and read in the file, 
+				                    //  it needs the i variable incremented before it gets here - the last item in the list and file will remain 
+				                    //  corrupted.
 				  a[i]->newaccount();
 				  i++; 
 				  cout << "i account variable is currently: " << i << endl;
@@ -71,11 +78,13 @@ int main()
 				  a[k]->viewaccdetails();
 				  break;
 		}
+		case 6:
+		{		  k = get_account();
+				  a[k]->updateAccDetails();
+				  break;
 		}
-		//cout << "\nDo you wish to continue [Press 'Y' to continue or 'N' to exit menu] : ";
-		//cin >> ch;
+		}
 	} while (x != 9);
-	//while (ch == 'y' || ch == 'Y');
 	saveaccdetails(a, i);
 	return EXIT_SUCCESS;  // Although not required, it is recommended to supply return exit code from main for portability - some operating systems require it
 }

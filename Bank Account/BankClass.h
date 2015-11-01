@@ -12,5 +12,6 @@ public:
 	void withdrawal();
 	void newaccount();
 	void viewaccdetails();
+	void updateAccDetails(); //need to change the above to camel case as well - makes the names easier to read
 };
 
