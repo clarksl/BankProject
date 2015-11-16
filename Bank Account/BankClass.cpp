@@ -76,5 +76,8 @@ void bank::updateAccDetails()
 	cout << "\tAge: " << d.age << endl;
 	cout << "\tEnter Age: ";
 	cin >> d.age;
+	cout << "\tBalance: " << balance << endl;
+	cout << "\tEnter Balance: ";
+	cin >> balance;
 	cout << "\t_________________________________________" << endl;
 }

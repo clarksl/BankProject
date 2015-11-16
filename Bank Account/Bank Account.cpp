@@ -25,18 +25,17 @@ int readaccdetails(bank *a[], int count);
 int main()
 {
 	//char ch;
-	static int i = 0;
+	int i = 0;
 	bank *a[MaxBankAccounts];
-	int x, k, j;
+	int x, k=0, j=0;
 	i = readaccdetails(a, MaxBankAccounts);
-	//cout << "number of accounts loaded" << i << endl;
+	cout << "number of accounts loaded" << i << endl;
 	do
 	{
-		cout << endl << endl << "************MENU********************" << endl;
+		cout << endl << endl << "************MENU***********************" << endl;
 		if (i>0)
 			cout << "            ----     # Accounts: [0-" << i << "]" << endl;
 		else cout << "            ----     # Accounts: [0]" << endl;
-		
 		cout << "1.Create new account\n2.Deposit\n3.Withdraw\n4.Transfer credits\n5.View account details\n6. Update Account Details\n\n9. Exit\n\n";
 		cout << "Enter choice no.: ";
 		cin >> x;
@@ -44,14 +43,11 @@ int main()
 		switch (x)
 		{
 		case 1:
-		{
-				  a[i] = new bank;  //this only works on the first one of a scratch file - once you've closed the program and read in the file, 
-				                    //  it needs the i variable incremented before it gets here - the last item in the list and file will remain 
-				                    //  corrupted.
-				  a[i]->newaccount();
-				  i++; 
-				  cout << "i account variable is currently: " << i << endl;
-				  break;
+		{		i += 1; 
+				cout << "i account variable is currently: " << i << endl;
+				a[i] = new bank;  
+				a[i]->newaccount();
+				break;
 		}
 		case 2:
 		{         /* this account number is really the array index and not the 'accnumber' on the class - this needs to be changed */
@@ -116,9 +112,9 @@ int saveaccdetails(bank *a[], int count)
 		cerr << "Error opening file, error code is " << return_code << ", system error returned is: " << buffer << endl;
 		return -1;
 	}
-	for (j = 0; j < count; j++)
+	for (j = 0; j <= count; j++)
 	{
-		//cout << "writing out item " << j << endl; // Debugging info
+		cout << "writing out item " << j << endl; // Debugging info
 		myFile.write((char*)a[j], sizeof(bank));
 	}
 	myFile.close();
@@ -135,15 +131,19 @@ int readaccdetails(bank *a[], int count)
 	{
 		strerror_s(buffer, 80);
 		cerr << "Error opening file, error code is " << return_code << ", system error returned is: " << buffer << endl;
-		return -1;
+		return 0; // 11/5/15 slc - this was -1 and causing the bug #9 
 	}
-	for (j = 0; j < count; j++)
-	{
-		//cout << "reading in item " << endl; //debugging info
+	cout << "reading in item: " << j << endl; //debugging info
+	a[j] = new bank;  // we must allocate a new bank object in the array or it will crash! If not there is no memory allocation location to put data
+	myFile.read((char *)a[j], sizeof(bank));
+	while (!myFile.eof())
+	{ // even after redoing this section, it will try to read another bank object even though if you look at the file, there is only 1
+		++j;
+		cout << "reading in item: " << j << endl; //debugging info
 		a[j] = new bank;  // we must allocate a new bank object in the array or it will crash! If not there is no memory allocation location to put data
 		myFile.read((char *)a[j], sizeof(bank));
-		if (myFile.eof()) break;
 	}
+	--j; /* this is only here because the eof function doesn't get detected until it's gone one read too many */
 	myFile.close();
 	return j;
 }
